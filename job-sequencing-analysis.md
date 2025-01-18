@@ -6,6 +6,15 @@ Bài toán Sắp Xếp Công Việc với Thời Hạn liên quan đến việc 
 - Một thời hạn phải hoàn thành
 - Một giá trị lợi nhuận thu được khi hoàn thành công việc
 
+## MÔ TẢ GIẢI THUẬT
+     B1: Sắp xếp công việc theo thứ tự lợi nhuận giảm dần
+     B2: Tìm thời hạn tối đa trong số tất cả các công việc
+     B3: Khởi tạo mảng kết quả có kích thước max_deadline với các ô trống
+     B4: Đối với mỗi công việc theo thứ tự đã sắp xếp:
+        - Tìm ô có sẵn mới nhất trước thời hạn của công việc
+        - Nếu tìm thấy ô, chỉ định công việc cho ô đó
+     B5: Trả về chuỗi công việc và tính tổng lợi nhuận 
+
 ## Các Thành Phần Cài Đặt
 
 ### 1. Cấu Trúc Dữ Liệu
