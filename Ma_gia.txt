@@ -1,0 +1,52 @@
+ MÃ GIẢ CHO GIẢI THUẬT
+
+// Hàm tìm deadline lớn nhất
+FUNCTION FindMaxDeadline(jobs)
+    maxDeadline ← jobs[0].deadline
+    FOR i ← 1 TO jobs.length - 1 DO
+        IF jobs[i].deadline > maxDeadline THEN
+            maxDeadline ← jobs[i].deadline
+        END IF
+    END FOR
+    RETURN maxDeadline
+END FUNCTION
+
+
+// Thuật toán chính
+BEGIN
+    n ← jobs.length
+    
+// Sắp xếp công việc theo lợi nhuận giảm dần
+    FOR i ← 0 TO n-2 DO
+        FOR j ← 0 TO n-i-2 DO
+            IF jobs[j].profit < jobs[j+1].profit THEN
+                SWAP jobs[j] WITH jobs[j+1]
+            END IF
+        END FOR
+    END FOR
+    
+    maxDeadline ← FindMaxDeadline(jobs)
+    
+
+// Khởi tạo các mảng
+    sequence ← NEW ARRAY[maxDeadline] // Fill with null/empty
+    slots ← NEW ARRAY[maxDeadline]    // Fill with false
+    totalProfit ← 0
+    
+    
+// Tìm vị trí cho các công việc
+    FOR i ← 0 TO n-1 DO
+        currentJob ← jobs[i]
+        // Cố gắng đặt mỗi công việc vào vị trí thời gian gần với deadline nhất mà vẫn trống
+        FOR j ← MIN(currentJob.deadline-1, maxDeadline-1) DOWNTO 0 DO
+            IF slots[j] = false THEN
+                sequence[j] ← currentJob.id
+                slots[j] ← true
+                totalProfit ← totalProfit + currentJob.profit
+                BREAK
+            END IF
+        END FOR
+    END FOR
+    
+    RETURN (sequence, totalProfit)
+END
